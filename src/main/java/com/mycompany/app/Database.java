@@ -15,11 +15,14 @@ public class Database {
     }
 
     private Database() throws SQLException {
-        String dbUrl = "jdbc:h2:module4db";
+        String dbUrl = "jdbc:h2:˜/module4db";
         try {
-            conn = DriverManager.getConnection(dbUrl);
+            Class.forName("org.h2.Driver");
+            conn = DriverManager.getConnection(dbUrl, "sa", "");
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

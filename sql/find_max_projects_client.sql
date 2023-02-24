@@ -11,4 +11,4 @@ SELECT *
                 FROM client
                 JOIN project
                 ON client.id = project.client_id)
-            GROUP BY name))
+            GROUP BY name));
