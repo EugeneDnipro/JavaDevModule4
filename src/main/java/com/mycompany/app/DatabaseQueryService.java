@@ -16,6 +16,7 @@ public class DatabaseQueryService {
     private static final String FIND_MAX_SALARY_WORKER_FILE = "sql/find_max_salary_worker.sql";
     private static final String FIND_LONGEST_PROJECT_FILE = "sql/find_longest_project.sql";
     private static final String FIND_YOUNGEST_ELDEST_WORKERS_FILE = "sql/find_youngest_eldest_workers.sql";
+    private static final String PRINT_PROJECT_PRICE_FILE = "sql/print_project_prices.sql";
 
     private static String getQuery(String pathToFile) {
         String stringQuery = null;
@@ -50,7 +51,6 @@ public class DatabaseQueryService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return selectedMaxProjectCountClient;
     }
 
@@ -66,7 +66,6 @@ public class DatabaseQueryService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return selectedMaxSalaryWorker;
     }
 
@@ -82,7 +81,6 @@ public class DatabaseQueryService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return selectedLongestProject;
     }
 
@@ -98,8 +96,22 @@ public class DatabaseQueryService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return selectedYoungestEldestWorkers;
+    }
+
+    List<ProjectPriceDto> findProjectPrice() {
+        ResultSet rs;
+        List<ProjectPriceDto> selectedProjectPrice = new ArrayList<>();
+
+        try (Statement stmt = Database.getInstance().getConnection().createStatement()) {
+            rs = stmt.executeQuery(getQuery(PRINT_PROJECT_PRICE_FILE));
+            while (rs.next()) {
+                selectedProjectPrice.add(new ProjectPriceDto(rs.getString("name"), rs.getLong("price")));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return selectedProjectPrice;
     }
 
     public static void main(String[] args) {
@@ -111,7 +123,7 @@ public class DatabaseQueryService {
         System.out.println("longestProject.toString() = " + longestProject.toString());
         List<YoungestEldestWorkersDto> youngestEldestWorkers = new DatabaseQueryService().findYoungestEldestWorkers();
         System.out.println("youngestEldestWorkers.toString() = " + youngestEldestWorkers.toString());
-
+        List<ProjectPriceDto> projectPrice = new DatabaseQueryService().findProjectPrice();
+        System.out.println("projectPrice.toString() = " + projectPrice.toString());
     }
-
 }

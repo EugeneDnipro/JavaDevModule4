@@ -9,17 +9,9 @@ public class MaxProjectCountClientDto {
         this.projectCount = projectCount;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public int getProjectCount() {
-        return projectCount;
-    }
-
     @Override
     public String toString() {
-        return "MaxProjectCountClientDto{" +
+        return '\n' + "MaxProjectCountClientDto{" +
                 "name='" + name + '\'' +
                 ", projectCount=" + projectCount +
                 '}';

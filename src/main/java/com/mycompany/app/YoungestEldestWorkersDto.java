@@ -13,21 +13,9 @@ public class YoungestEldestWorkersDto {
         this.birthday = birthday;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public LocalDate getBirthday() {
-        return birthday;
-    }
-
     @Override
     public String toString() {
-        return "YoungestEldestWorkersDto{" +
+        return '\n' + "YoungestEldestWorkersDto{" +
                 "type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", birthday=" + birthday +

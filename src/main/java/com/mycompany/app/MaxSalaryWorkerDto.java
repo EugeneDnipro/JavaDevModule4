@@ -9,17 +9,9 @@ public class MaxSalaryWorkerDto {
         this.salary = salary;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public long getSalary() {
-        return salary;
-    }
-
     @Override
     public String toString() {
-        return "MaxSalaryWorkerDto{" +
+        return '\n' + "MaxSalaryWorkerDto{" +
                 "name='" + name + '\'' +
                 ", salary=" + salary +
                 '}';
